@@ -1,8 +1,8 @@
 # A D port of utf8proc
 
+- Ported from [utf8proc](https://github.com/JuliaStrings/utf8proc) version 2.5.0
 - Ported with some help of [dstep](https://github.com/jacob-carlborg/dstep)
 - Works with -betterC
-- Ported from version 2.5.0
 
 ## An example
 
