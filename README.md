@@ -50,6 +50,9 @@ extern (C) int main()
     // assert(nchar == 20);
     printf("You have %d entries in your string!", nchar);
 
+    free(mstr);
+    free(dst);
+    
     return 0;
 }
 ```
