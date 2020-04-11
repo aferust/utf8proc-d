@@ -1,0 +1,30 @@
+{
+    "authors": [
+        "Steven G. Johnson", "Jiahao Chen", "Tony Kelman", "Jonas Fonseca",
+        "Ferhat Kurtulmuş"
+    ],
+    "copyright": "Copyright © 2020, user",
+    "description": "D port of utf8proc.",
+    "license": "utf8proc",
+    "name": "utf8proc",
+    "dflags": ["-betterC"],
+    "dependencies": {
+        "stringnogc": "0.0.4"
+    },
+    "version": "0.0.1",
+    "importPaths": ["source"],
+    "sourcePaths": ["source"],
+    "configurations": [
+        {
+            "name": "library",
+            "targetType": "library",
+            "sourcePaths": ["source"]
+        },
+        {
+            "name": "import",
+            "targetType": "sourceLibrary",
+            "sourceFiles-posix": ["libutf8proc.a"],
+            "sourceFiles-windows": ["utf8proc.lib"]
+        }
+    ]
+}
