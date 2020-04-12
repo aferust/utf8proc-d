@@ -20,13 +20,13 @@ extern (C) int main()
     string mstring = "ğüşöç ııİıııŞıÜııÇıı"; // 20 entries
     
     // duplicate mstring and cast it to ubyte*
-    ubyte* mstr = cast(ubyte*)malloc((mstring.sizeof / ubyte.sizeof) * mstring.length);
-    memcpy(mstr, mstring.ptr, (mstring.sizeof / ubyte.sizeof) * mstring.length);
+    ubyte* mstr = cast(ubyte*)malloc(mstring.length + 1);
+    memcpy(mstr, mstring.ptr, mstring.length + 1);
 
     // some buffer for output. 
     ubyte* dst;
 
-    auto sz = utf8proc_map(mstr, 0, &dst, UTF8PROC_NULLTERM);
+    auto sz = utf8proc_map(mstr, mstring.length, &dst, UTF8PROC_NULLTERM);
 
     printf("your string: %s \n", cast(char*)dst);
     
