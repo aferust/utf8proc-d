@@ -17,7 +17,7 @@ import utf8proc;
 
 extern (C) int main()
 {
-        string mstring = "ğüşöç ııİıııŞıÜııÇıı"; // 20 entries
+    string mstring = "ğüşöç ııİıııŞıÜııÇıı"; // 20 entries
     
     // duplicate mstring and cast it to ubyte*
     ubyte* mstr = cast(ubyte*)malloc((mstring.sizeof / ubyte.sizeof) * mstring.length);
@@ -52,7 +52,7 @@ extern (C) int main()
     
     free(mstr);
     free(dst);
-    
+
     return 0;
 }
 ```
