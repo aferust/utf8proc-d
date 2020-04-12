@@ -51,6 +51,7 @@ extern (C) int main()
     printf("You have %d entries in your string!", nchar);
     
     free(mstr);
+    free(dst);
     
     return 0;
 }
