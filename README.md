@@ -17,24 +17,24 @@ import utf8proc;
 
 extern (C) int main()
 {
-    string mstring = "ğüşöç ııİıııŞıÜııÇıı"; // 20 entries
+        string mstring = "ğüşöç ııİıııŞıÜııÇıı"; // 20 entries
     
     // duplicate mstring and cast it to ubyte*
     ubyte* mstr = cast(ubyte*)malloc((mstring.sizeof / ubyte.sizeof) * mstring.length);
     memcpy(mstr, mstring.ptr, (mstring.sizeof / ubyte.sizeof) * mstring.length);
 
     // some buffer for output. 
-    ubyte** dst = cast(ubyte**)malloc((ubyte*).sizeof * mstring.sizeof);
+    ubyte* dst;
 
-    auto sz = utf8proc_map(mstr, mstring.sizeof, dst, UTF8PROC_NULLTERM);
+    auto sz = utf8proc_map(mstr, 0, &dst, UTF8PROC_NULLTERM);
 
-    printf("your string: %s \n", cast(char*)*dst);
+    printf("your string: %s \n", cast(char*)dst);
     
     utf8proc_ssize_t size = sz;
     utf8proc_int32_t data;
     utf8proc_ssize_t n;
 
-    utf8proc_uint8_t* char_ptr = mstr;
+    ubyte* char_ptr = mstr;
 
     printf("Those are your utf8 characters one by one: \n".ptr);
 
@@ -49,9 +49,8 @@ extern (C) int main()
 
     // assert(nchar == 20);
     printf("You have %d entries in your string!", nchar);
-
+    
     free(mstr);
-    free(dst);
     
     return 0;
 }
