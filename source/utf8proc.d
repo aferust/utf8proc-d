@@ -55,8 +55,6 @@ version(LDC){
   }
 }
 
-import stringnogc;
-
 import utf8procdata;
 
 /** @file */
