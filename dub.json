@@ -8,7 +8,7 @@
     "license": "utf8proc",
     "name": "utf8proc",
     "dflags": ["-betterC"],
-    "version": "0.0.1",
+    "version": "0.0.2",
     "importPaths": ["source"],
     "sourcePaths": ["source"],
     "configurations": [
