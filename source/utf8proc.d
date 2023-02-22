@@ -50,7 +50,9 @@
 module utf8proc;
 
 version(LDC){
+  version(D_BetterC){
     pragma(LDC_no_moduleinfo);
+  }
 }
 
 import stringnogc;
@@ -240,6 +242,7 @@ struct utf8proc_property_struct
         uint, "pad", 2,
         uint, "boundclass", 8));
     */
+    @nogc nothrow:
     this(
         utf8proc_propval_t category,
         utf8proc_propval_t combining_class,
@@ -469,38 +472,31 @@ enum UTF8PROC_HANGUL_T_END    = 0x11FA;
 enum UTF8PROC_HANGUL_S_START  = 0xAC00;
 enum UTF8PROC_HANGUL_S_END    = 0xD7A4;
 
-// TODO: remove dependency of stringnogc by doing some compile-time string concat
-alias String = dString!aumem;
+@nogc nothrow:
 
-String utf8proc_version() {
-    return packStr!aumem(UTF8PROC_VERSION_MAJOR, ".", UTF8PROC_VERSION_MINOR, ".", UTF8PROC_VERSION_PATCH);
-}
-
-String utf8proc_unicode_version() {
-    String ret = "13.0.0";
+string utf8proc_version() {
+    enum ret = UTF8PROC_VERSION_MAJOR.stringof ~ "." ~ UTF8PROC_VERSION_MINOR.stringof ~ "." ~ UTF8PROC_VERSION_PATCH.stringof;
     return ret;
 }
 
-String utf8proc_errmsg(utf8proc_ssize_t errcode) {
+string utf8proc_unicode_version() {
+    return "13.0.0";
+}
+
+string utf8proc_errmsg(utf8proc_ssize_t errcode) {
     switch (errcode) {
         case UTF8PROC_ERROR_NOMEM:
-            String ret = "Memory for processing UTF-8 data could not be allocated.";
-            return ret;
+            return "Memory for processing UTF-8 data could not be allocated.";
         case UTF8PROC_ERROR_OVERFLOW:
-            String ret = "UTF-8 string is too long to be processed.";
-            return ret;
+            return "UTF-8 string is too long to be processed.";
         case UTF8PROC_ERROR_INVALIDUTF8:
-            String ret = "Invalid UTF-8 string";
-            return ret;
+            return "Invalid UTF-8 string";
         case UTF8PROC_ERROR_NOTASSIGNED:
-            String ret = "Unassigned Unicode code point found in UTF-8 string.";
-            return ret;
+            return "Unassigned Unicode code point found in UTF-8 string.";
         case UTF8PROC_ERROR_INVALIDOPTS:
-            String ret = "Invalid options for UTF-8 processing chosen.";
-            return ret;
+            return "Invalid options for UTF-8 processing chosen.";
         default:
-            String retd = "An unknown error occurred while processing UTF-8 data.";
-            return retd;
+            return "An unknown error occurred while processing UTF-8 data.";
     }
 }
 

@@ -8,9 +8,6 @@
     "license": "utf8proc",
     "name": "utf8proc",
     "dflags": ["-betterC"],
-    "dependencies": {
-        "stringnogc": "0.0.4"
-    },
     "version": "0.0.1",
     "importPaths": ["source"],
     "sourcePaths": ["source"],

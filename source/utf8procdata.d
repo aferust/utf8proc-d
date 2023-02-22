@@ -1,7 +1,9 @@
 module utf8procdata;
 
 version(LDC){
+  version(D_BetterC){
     pragma(LDC_no_moduleinfo);
+  }
 }
 
 import utf8proc;
